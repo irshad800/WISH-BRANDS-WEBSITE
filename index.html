@@ -12,7 +12,381 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css" />
+  <!-- <link rel="stylesheet" href="css/style.css" /> -->
+
+<style>
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden; /* allow scroll vertically */
+  font-family: 'Poppins', sans-serif;
+background-color:#f5f5dc ;
+  color: #000;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1; /* ✅ Full clarity */
+  pointer-events: none;
+}
+.animated-image-showcase {
+  padding: 80px 20px;
+  background: #000;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.showcase-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #FFD700;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animated-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.img-box {
+  width: 240px;
+  padding: 10px;
+  border-radius: 16px;
+  background: #111;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.img-box img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Animations */
+.zoom-in {
+  animation: zoomIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+.float-up {
+  animation: floatUp 1.2s ease-out forwards;
+  animation-delay: 0.7s;
+}
+.fade-in {
+  animation: fadeIn 1.4s ease-out forwards;
+  animation-delay: 0.9s;
+}
+
+/* Keyframes */
+@keyframes zoomIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes floatUp {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(30px); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+  from { opacity: 0; }
+}
+
+
+.highlighted-box {
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 30px 25px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+.launch-wrapper {
+  position: relative;
+  height: 100vh; /* fixes extra space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+
+.launch-content {
+  position: relative;
+  z-index: 2;
+}
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, #fff5e1 0%, #f7d9b4 40%, #e8c097 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  text-align: center;
+  animation: glowPulse 6s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 10px rgba(255, 180, 80, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 140, 0, 0.4); }
+  100% { box-shadow: 0 0 10px rgba(255, 180, 80, 0.3); }
+}
+
+#preloader img {
+  width: 220px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#preloader h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff8800, #cc5500, #ff8800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s infinite, fadeIn 2s ease-out;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+}
+
+/* Background Video */
+/* video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+} */
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;  /* Reduced from 40px to 20px */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+
+.headline-top {
+  font-size: clamp(18px, 6vw, 26px);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  background: linear-gradient(270deg, #FFD700, #FFA500, #FFD700);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  animation: shimmer 5s ease-in-out infinite, fadeIn 2s ease-out;
+  text-align: center;
+}
+
+.headline-bottom {
+  font-size: clamp(20px, 7vw, 30px);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+  animation: fadeIn 3s ease-out;
+  text-align: center;
+  margin: 10px 0;
+}
+.top-logo {
+  height: 60px; /* was 70px */
+  margin-top: 5px; /* was 10px */
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+  animation: glowLogo 2s ease-in-out infinite alternate;
+}
+
+
+@keyframes glowLogo {
+  from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); transform: scale(1); }
+  to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.note {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ddd;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 0;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .top-logo { height: 60px; }
+  .note { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .top-logo { height: 50px; }
+  .note { font-size: 13px; }
+}
+.crunch-btn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  cursor: pointer;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+.crunch-btn img {
+  width: 120px;
+  transition: transform 0.2s ease;
+}
+
+.crunch-btn span {
+  display: block;
+  margin-top: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: #333;
+  background: #fff8e0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.crunch-btn:hover img {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.cookie {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 40% 35%, #e8b87b 20%, #d79d60 100%);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: inset -4px -4px 8px #b0743f, inset 4px 4px 8px #ffd6a2;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+.cookie::before,
+.cookie::after {
+  content: '';
+  position: absolute;
+  background: #875e36;
+  border-radius: 50%;
+}
+
+.cookie::before {
+  width: 10px;
+  height: 10px;
+  top: 30%;
+  left: 35%;
+}
+
+.cookie::after {
+  width: 8px;
+  height: 8px;
+  top: 60%;
+  right: 30%;
+}
+
+.cookie .bite {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #f7d9b4;
+  border-radius: 50%;
+  top: -10px;
+  right: -10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cookie.crunched {
+  transform: scale(0.7) rotate(20deg);
+  opacity: 0;
+}
+
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, #fbd786, #f7797d, #c6ffdd);
+  background-size: 600% 600%;
+  animation: bgMove 10s ease infinite;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
+
+
 </head>
 <body>
 
@@ -23,21 +397,162 @@
   </div>
 
   <!-- Background Video -->
-  <video autoplay muted loop playsinline>
+<!-- Optional visual replacement for video -->
+
+<!-- ✅ This section replaces full background video with image box & closes open tags properly -->
+<section class="launch-wrapper">
+  <video class="background-video" autoplay muted loop playsinline>
     <source src="videos/BRANDS.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
+<div class="launch-content highlighted-box">
+  <h1 class="launch-title">Wish Brands</h1>
+  <p class="launch-subtitle">The Official Launch Begins In...</p>
+
+  <div class="countdown" id="countdown">
+    <div><span id="days">--</span><small>Days</small></div>
+    <div><span id="hours">--</span><small>Hours</small></div>
+    <div><span id="minutes">--</span><small>Minutes</small></div>
+    <div><span id="seconds">--</span><small>Seconds</small></div>
+  </div>
+
+  <p class="launch-note">Mark your calendars: <strong>June 15, 2025</strong></p>
+</div>
+
+</section>
+
+
+
+</section>
+<!-- Product Showcase Section -->
+
+
+<!-- CSS -->
+<style>
+
+
+
+
+.video-box {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 240px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+  z-index: 1;
+}
+
+.video-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.launch-content {
+  z-index: 2;
+}
+
+.launch-logo {
+  width: 80px;
+  margin-bottom: 20px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 10px #ffa500); }
+  to   { filter: drop-shadow(0 0 25px #ffd700); }
+}
+
+.launch-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 10px 0;
+}
+
+.launch-subtitle {
+  font-size: 1.2rem;
+  color: #f0e6d2;
+  margin-bottom: 30px;
+}
+
+.countdown {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.countdown div {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.countdown span {
+  font-weight: bold;
+  color: #FFD700;
+}
+
+.countdown small {
+  display: block;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+.launch-note {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-top: 10px;
+}
+</style>
+
+<!-- JS -->
+<script>
+function updateCountdown() {
+  const launchDate = new Date("June 15, 2025 00:00:00").getTime();
+  const now = new Date().getTime();
+  const distance = launchDate - now;
+
+  if (distance < 0) {
+    document.getElementById("countdown").innerHTML = "<strong>We have launched!</strong>";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
   <!-- Overlay Content -->
   <div class="overlay">
-    <h1 class="headline-top">Without Wish, No Brands</h1>
-    <h1 class="headline-bottom">Wish Brands</h1>
+    <h1 class="headline-top">WITHOUT WISH, NO BRANDS</h1>
+    <h1 class="headline-bottom">WISH BRANDS</h1>
     <img src="images/logo.png" alt="Wish Brands Logo" class="top-logo" />
   </div>
 
-  <div class="note">
+  <!-- <div class="note">
     This website is currently under development. Stay tuned for the official launch of Wish Brands — where every brand begins with a wish.
-  </div>
+  </div> -->
 <!-- Crunch Button -->
 <div id="crunchButton" class="crunch-btn" style="display: none;">
  <div class="cookie" id="cookieElement">
@@ -50,6 +565,63 @@
 <audio id="crunchSound" src="sounds/crunch.mp3"></audio>
 
   <!-- JS -->
-  <script src="js/main.js"></script>
+  <!-- <script src="js/main.js"></script> -->
+
+
+  <script>window.addEventListener("load", function () {
+  const gifDuration = 3500;
+
+  // Step 1: Show "Wish Brands" after GIF
+  setTimeout(() => {
+    document.getElementById("loaderGif").style.display = "none";
+
+    const text = document.getElementById("preloaderText");
+    text.style.display = "block";
+    text.style.opacity = "0";
+    text.style.transition = "opacity 1s ease";
+
+    requestAnimationFrame(() => {
+      text.style.opacity = "1";
+    });
+
+    // Step 2: Show Crunch Button
+    setTimeout(() => {
+      document.getElementById("crunchButton").style.display = "flex";
+    }, 1500);
+  }, gifDuration);
+
+  // Step 3: Handle Crunch Button Click
+  document.getElementById("crunchButton").addEventListener("click", () => {
+    const crunchSound = document.getElementById("crunchSound");
+    const cookie = document.getElementById("cookieElement");
+    const preloader = document.getElementById("preloader");
+    const overlay = document.querySelector(".overlay");
+    const crunchBtn = document.getElementById("crunchButton");
+
+    // Play crunch sound
+    crunchSound.play();
+
+    // Animate cookie
+    cookie.classList.add("crunched");
+
+    // Hide button and transition
+    crunchBtn.style.transition = "transform 0.3s ease, opacity 0.5s";
+    crunchBtn.style.transform = "scale(0.3) rotate(45deg)";
+    crunchBtn.style.opacity = "0";
+
+    setTimeout(() => {
+      crunchBtn.style.display = "none";
+      preloader.style.transition = "opacity 1s ease";
+      preloader.style.opacity = "0";
+
+      setTimeout(() => {
+        preloader.style.display = "none";
+        overlay.style.opacity = "1";
+        overlay.style.pointerEvents = "auto";
+      }, 1000);
+    }, 800);
+  });
+});
+</script>
 </body>
 </html>
