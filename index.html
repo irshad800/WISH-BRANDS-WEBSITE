@@ -118,6 +118,25 @@ background-color:#f5f5dc ;
   -webkit-backdrop-filter: blur(8px);
 }
 
+.contact-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #FC791A;
+  color: white;
+  font-weight: bold;
+  padding: 12px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-button:hover {
+  background-color: #d9630a;
+}
 
 .launch-wrapper {
   position: relative;
@@ -417,7 +436,10 @@ background-color:#f5f5dc ;
     <div><span id="seconds">--</span><small>Seconds</small></div>
   </div>
 
-  <p class="launch-note">Mark your calendars: <strong>June 15, 2025</strong></p>
+<p class="launch-note">
+  📩 Need help? <a href="mailto:contact@wishbrands.com" style="color: #FFD700; text-decoration: underline;">Email us here</a>
+</p>
+<!-- EMAIL PASSWORD =               .6X=jtl)K].=  -->
 </div>
 
 </section>
@@ -623,5 +645,9 @@ updateCountdown();
   });
 });
 </script>
+<a href="mailto:contact@wishbrands.com" class="contact-button" title="Email Us">
+  📧 Contact Us
+</a>
+
 </body>
 </html>
