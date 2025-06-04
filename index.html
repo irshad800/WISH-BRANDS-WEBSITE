@@ -6,252 +6,40 @@
   <title>Wish Brands</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png" sizes="32x32" />
+  <link rel="icon" href="images/logo.png" type="image/png" sizes="32x32" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
-      background-color: #000;
-      color: white;
-    }
-
-    /* Preloader */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, #fff5e1 0%, #f7d9b4 40%, #e8c097 100%);
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  text-align: center;
-  overflow: hidden;
-  animation: glowPulse 6s ease-in-out infinite;
-}
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 10px rgba(255, 180, 80, 0.3);
-    background-position: 0% 50%;
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(255, 140, 0, 0.4);
-    background-position: 100% 50%;
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(255, 180, 80, 0.3);
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes backgroundMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-
-    #preloader img {
-      width: 220px;
-      height: auto;
-      transform: scale(1.2);
-      margin-bottom: 20px;
-    }
-
-  #preloader h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #ff8800, #cc5500, #ff8800);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s infinite, fadeIn 2s ease-out;
-  text-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
-}
-
-    video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 40px 0;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s ease;
-    }
-
-    .headline-top {
-      font-size: clamp(18px, 6vw, 26px);
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
-      background: linear-gradient(270deg, #FFD700, #FFA500, #FFD700);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 0;
-      line-height: 1.3;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-      animation: shimmer 5s ease-in-out infinite, fadeIn 2s ease-out;
-      text-align: center;
-    }
-
-    .headline-bottom {
-      font-size: clamp(20px, 7vw, 30px);
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      background: linear-gradient(90deg, #FFD700, #FFA500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 10px 0;
-      line-height: 1.2;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-      animation: fadeIn 3s ease-out;
-      text-align: center;
-    }
-
-    .top-logo {
-      height: 70px;
-      margin-top: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
-      animation: glowLogo 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowLogo {
-      from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.6); transform: scale(1); }
-      to { box-shadow: 0 0 25px rgba(255, 215, 0, 1); transform: scale(1.05); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .note {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 16px;
-      color: #ddd;
-      z-index: 1;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 12px 0;
-      font-weight: 500;
-    }
-
-    @media (max-width: 768px) {
-      .top-logo { height: 60px; }
-      .note { font-size: 14px; }
-    }
-
-    @media (max-width: 480px) {
-      .top-logo { height: 50px; }
-      .note { font-size: 13px; }
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<!-- Preloader -->
-<div id="preloader">
-  <img id="loaderGif" src="https://html.code4rest.com/HTML/15_Cooki%20Drem/img/loader.gif" alt="Loading..." />
-  <h2 id="preloaderText" style="display: none;">Wish Brands</h2>
-</div>
-
+  <!-- Preloader -->
+  <div id="preloader">
+    <img id="loaderGif" src="https://html.code4rest.com/HTML/15_Cooki%20Drem/img/loader.gif" alt="Loading..." />
+    <h2 id="preloaderText" style="display: none;">Wish Brands</h2>
+  </div>
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline>
-    <source src="BRANDS.mp4" type="video/mp4" />
+    <source src="videos/BRANDS.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  <!-- Overlay Content (hidden at first) -->
+  <!-- Overlay Content -->
   <div class="overlay">
     <h1 class="headline-top">Without Wish, No Brands</h1>
     <h1 class="headline-bottom">Wish Brands</h1>
-    <img src="logo.png" alt="Wish Brands Logo" class="top-logo" />
+    <img src="images/logo.png" alt="Wish Brands Logo" class="top-logo" />
   </div>
 
   <div class="note">
     This website is currently under development. Stay tuned for the official launch of Wish Brands — where every brand begins with a wish.
   </div>
 
-  <!-- Script to Hide Preloader and Show Content -->
-<script>
-  window.addEventListener("load", function () {
-    const gifDuration = 3500; // Adjust this to match your GIF duration in ms
-    const showTextDelay = 500; // Delay before showing text after GIF disappears
-
-    setTimeout(() => {
-      // Remove GIF
-      const gif = document.getElementById("loaderGif");
-      gif.style.display = "none";
-
-      // Show "Wish Brands" text
-      const text = document.getElementById("preloaderText");
-      text.style.display = "block";
-      text.style.opacity = "0";
-      text.style.transition = "opacity 1s ease";
-
-      // Fade in the text
-      requestAnimationFrame(() => {
-        text.style.opacity = "1";
-      });
-
-      // Then fade out everything
-      setTimeout(() => {
-        const preloader = document.getElementById("preloader");
-        const overlay = document.querySelector(".overlay");
-
-        preloader.style.transition = "opacity 1s ease";
-        preloader.style.opacity = "0";
-
-        setTimeout(() => {
-          preloader.style.display = "none";
-          overlay.style.opacity = "1";
-          overlay.style.pointerEvents = "auto";
-        }, 1000);
-      }, 2000); // Delay after showing text
-    }, gifDuration);
-  });
-</script>
-
-
-
+  <!-- JS -->
+  <script src="js/main.js"></script>
 </body>
 </html>
